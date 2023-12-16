@@ -11,7 +11,6 @@ window.onload = () => {
 
     setUpInteraction();
     document.querySelector("#error-message").style.display = "none";
-    // createBoard();
   };
 
   const setUpInteraction = () => {
@@ -22,18 +21,25 @@ window.onload = () => {
   const onCreateBoardClick = (e) => {
     let input = document.querySelector("#row-col-input").value.trim();
     console.log(input);
+    let message = "";
 
     let errorMessageHTML = document.querySelector("#error-message");
 
-
     if(!input) {
-        errorMessageHTML.innerHTML = `"Row/Col Num" can't be blank`;
-        errorMessageHTML.style.display = "block";
+        message = `"Row/Col Num" can't be blank`;
     }
 
     else if(input < 2) {
-        errorMessageHTML.innerHTML = `"Row/Col Num" can't be less than 2`;
+        message = `"Row/Col Num" can't be less than 2`;
+    }
+
+    else if(input > 10) {
+        message = `"Row/Col Num" can't be greater than 10`;
+    }
+
+    if(message) {
         errorMessageHTML.style.display = "block";
+        errorMessageHTML.innerHTML = message;
     }
 
     else {
