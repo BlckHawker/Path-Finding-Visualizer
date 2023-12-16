@@ -15,12 +15,11 @@ window.onload = () => {
 
   const setUpInteraction = () => {
     document.querySelector("#button").addEventListener("click", onCreateBoardClick)
-    document.addEventListener("mousedown", function (e) {board.forEach(arr => arr.forEach(node => node.handleClickEvent(e.clientX, e.clientY))); console.log(e.clientX, e.clientY); })
+    document.addEventListener("mousedown", function (e) {board.forEach(arr => arr.forEach(node => node.handleClickEvent(e.clientX, e.clientY))); })
   }
 
   const onCreateBoardClick = (e) => {
     let input = document.querySelector("#row-col-input").value.trim();
-    console.log(input);
     let message = "";
 
     let errorMessageHTML = document.querySelector("#error-message");
@@ -50,21 +49,19 @@ window.onload = () => {
 
 const createBoard = (rowNum = 10) => {
     const boxDimension = boardDimension / (parseInt(rowNum) + 1);
-    let svgHTML = `<svg width="${boardDimension}" height="${boardDimension}">`
+    let svg = document.querySelector("svg");
+    svg.setAttribute("width", boardDimension);
+    svg.setAttribute("height", boardDimension);
     for(let row = 0; row < rowNum; row++) { 
         const newRow = [];
         let y = row * boxDimension + row * spacing;
         for(let col = 0; col < rowNum; col++) { 
             let x = col * boxDimension + col * spacing;
-            let rect = `<rect x="${x}" y="${y}" width="${boxDimension}" height="${boxDimension}"/>`;
-            svgHTML += rect;
-            newRow.push(new Node(col, row, x, y, boxDimension));
+            let rect = document.createElementNS("http://www.w3.org/2000/svg", 'rect');
+            newRow.push(new Node(col, row, x, y, boxDimension, rect));
+            svg.append(rect);
         }
         board.push(newRow);
     }
-    svgHTML += "</svg>"
-    document.querySelector("#svg-container").innerHTML = svgHTML;
-
-    console.log("node screenSpace")
-    board.forEach(arr => arr.forEach(node => node.printScreenSpace()));
+    // board.forEach(arr => arr.forEach(node => node.printScreenSpace()));
 }
