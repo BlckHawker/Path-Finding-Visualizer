@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        rect {
+            fill: none;
+            stroke: black;
+            stroke-width: 1px;
+
+        }
+
+        #controls {
+            display: flex;
+            gap: 1%;
+
+        }
+        body {
+
+        }
+
+        #error-message {
+            margin: 1% 0px;
+            color: red;
+        }
+    </style>
+
+    <script src="js/utils.js" type="module"></script>
+</head>
+<body>
+    <div>
+        <div id="controls">
+            <form>
+                <label for="row-col-input">Row/Col Num:</label>
+                <input type="text" id="row-col-input" name="row-col-input"><br>
+              </form>
+            <button id="button">Create Board</button>
+        </div>
+        <p id="error-message">If you are seeing this message, something did not load correctly. Contact the developer</p>
+    </div>
+    
+    
+    <div id="svg-container">
+    </div>
+
+    
+</body>
+</html>
